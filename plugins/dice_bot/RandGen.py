@@ -79,7 +79,8 @@ class RandGen:
         if cmd.find("d") == -1:
             return int(cmd)
         else:
-            dice_cmd = re.match('^(?P<amount>\d+)d(?P<max_num>\d+)(?:\((?P<punish>\d+)\))?(?:\[(?P<award>\d+)\])?$', cmd).groupdict()
+            dice_cmd = re.match(
+                '^(?P<amount>\d+)d(?P<max_num>\d+)(?:\((?P<punish>\d+)\))?(?:\[(?P<award>\d+)\])?$', cmd).groupdict()
             amount = int(dice_cmd['amount'])
             max_num = int(dice_cmd['max_num'])
             punish = award = 0
@@ -88,3 +89,39 @@ class RandGen:
             elif dice_cmd['award']:
                 award = int(dice_cmd['award'])
             return self.rand_gen(max_num, amount, punish, award, cmd)
+
+    def check_process(self, cmd):
+        "处理检定指令"
+        check_cmd = re.match(
+            '^(?P<status>\d+)(?:\((?P<punish>\d+)\))?(?:\[(?P<award>\d+)\])?(?: (?P<name>.*))?$', cmd).groupdict()
+        status = int(check_cmd['status'])
+        name = ""
+        punish = award = 0
+        if check_cmd['name']:
+            name = check_cmd['name']
+        if check_cmd['punish']:
+            punish = int(check_cmd['punish'])
+        elif check_cmd['award']:
+            award = int(check_cmd['award'])
+        if status <= 0 or status > 100:
+            self.msg_out = "错误！允许的数值范围为1-100。"
+            return
+        result = self.rand_gen(100, 1, punish, award, "1d100")
+        if result <= 5:
+            self.msg_out = name + "检定：" + \
+                str(result) + "/" + str(status) + "(大成功)\n" + self.msg_out
+        elif result <= status/5:
+            self.msg_out = name + "检定：" + \
+                str(result) + "/" + str(status) + "(极难成功)\n" + self.msg_out
+        elif result <= status/2:
+            self.msg_out = name + "检定：" + \
+                str(result) + "/" + str(status) + "(困难成功)\n" + self.msg_out
+        elif result <= status:
+            self.msg_out = name + "检定：" + \
+                str(result) + "/" + str(status) + "(成功)\n" + self.msg_out
+        elif result > 95:
+            self.msg_out = name + "检定：" + \
+                str(result) + "/" + str(status) + "(大失败)\n" + self.msg_out
+        else:
+            self.msg_out = name + "检定：" + \
+                str(result) + "/" + str(status) + "(失败)\n" + self.msg_out

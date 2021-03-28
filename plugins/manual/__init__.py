@@ -16,9 +16,11 @@ async def manual_handle(bot: Bot, event: Event, state: T_State):
     await manual.finish(plugin_config.about)
 
 @help.handle()
-async def manual_handle(bot: Bot, event: Event, state: T_State):
+async def help_handle(bot: Bot, event: Event, state: T_State):
     args = str(event.get_message()).strip()
     if args == "r":
         await help.finish(plugin_config.help_r)
+    elif args == "check":
+        await help.finish(plugin_config.help_check)
     else:
         await help.finish(plugin_config.help)
