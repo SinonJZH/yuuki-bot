@@ -125,3 +125,7 @@ class RandGen:
         else:
             self.msg_out = name + "检定：" + \
                 str(result) + "/" + str(status) + "(失败)\n" + self.msg_out
+
+    def choose(self, cmd):
+        items = cmd.split(' ')
+        self.msg_out = "抽签结果：" + random.choice(items)

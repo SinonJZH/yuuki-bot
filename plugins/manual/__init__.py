@@ -22,5 +22,9 @@ async def help_handle(bot: Bot, event: Event, state: T_State):
         await help.finish(plugin_config.help_r)
     elif args == "check":
         await help.finish(plugin_config.help_check)
+    elif args == "choose":
+        await help.finish(plugin_config.help_choose)
+    elif args == "daily":
+        await help.finish(plugin_config.help_daily)
     else:
         await help.finish(plugin_config.help)
