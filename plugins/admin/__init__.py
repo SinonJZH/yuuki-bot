@@ -79,7 +79,7 @@ async def handle_admin(bot: Bot, event: Event, state: T_State):
         data = data_source()
         await data.connect(1)
         req_list = await data.request_list()
-        if req_list is None:
+        if req_list == "":
             await admin.finish("当前没有未处理的请求。")
         else:
             req_list = "未处理请求列表：" + req_list

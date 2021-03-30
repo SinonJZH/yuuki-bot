@@ -94,7 +94,7 @@ class data_source:
         self.redis_connect.delete(
             self.redis_prefix + 'req_event_' + str(event_id))
         self.redis_connect.hdel(self.redis_prefix + 'req_msg', request_id)
-        self.redis_connect.hdel(self.redis_prefix + 'req_msg', request_id)
+        self.redis_connect.hdel(self.redis_prefix + 'req_index', request_id)
         return True
 
     async def request_list(self):
