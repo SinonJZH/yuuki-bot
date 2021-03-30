@@ -1,9 +1,10 @@
 import nonebot
-from .config import Config
 from nonebot.plugin import on_message, on_command
 from nonebot.rule import to_me, Rule
 from nonebot.typing import T_State
-from nonebot.adapters.mirai import Bot, Event, message
+from nonebot.adapters.mirai import Bot, Event, MessageSegment
+
+from .config import Config
 
 global_config = nonebot.get_driver().config
 plugin_config = Config(**global_config.dict())

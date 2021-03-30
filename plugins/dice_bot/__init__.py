@@ -1,14 +1,15 @@
+import random
+import string
+import re
+
 import nonebot
-from .config import Config
-from .RandGen import RandGen
 from nonebot.plugin import on_command
 from nonebot.rule import to_me
 from nonebot.typing import T_State
 from nonebot.adapters.mirai import Bot, Event
 
-import random
-import string
-import re
+from .config import Config
+from .RandGen import RandGen
 
 global_config = nonebot.get_driver().config
 plugin_config = Config(**global_config.dict())
@@ -19,7 +20,7 @@ choose = on_command('choose', priority=2)
 daily = on_command('daily', priority=2)
 
 @dice.handle()
-async def handle_first_receive(bot: Bot, event: Event, state: T_State):
+async def handle_dice_receive(bot: Bot, event: Event, state: T_State):
     args = str(event.get_message()).strip()  # 首次发送命令时跟随的参数，例：/天气 上海，则args为上海
     if args:
         state["dice"] = args  # 如果用户发送了参数则直接赋值
@@ -35,7 +36,7 @@ async def handle_dice(bot: Bot, event: Event, state: T_State):
     await dice.finish(rand_gen.msg_out)
 
 @check.handle()
-async def handle_first_receive(bot: Bot, event: Event, state: T_State):
+async def handle_check_receive(bot: Bot, event: Event, state: T_State):
     args = str(event.get_message()).strip()  # 首次发送命令时跟随的参数，例：/天气 上海，则args为上海
     if args:
         state["check"] = args  # 如果用户发送了参数则直接赋值
@@ -49,7 +50,7 @@ async def hanle_check(bot: Bot, event: Event, state: T_State):
     await check.finish(rand_gen.msg_out)
 
 @choose.handle()
-async def handle_first_receive(bot: Bot, event: Event, state: T_State):
+async def handle_choose_receive(bot: Bot, event: Event, state: T_State):
     args = str(event.get_message()).strip()  # 首次发送命令时跟随的参数，例：/天气 上海，则args为上海
     if args:
         state["choose"] = args  # 如果用户发送了参数则直接赋值
