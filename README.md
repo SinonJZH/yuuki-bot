@@ -36,6 +36,7 @@
 7. `Redis_Port=6379`  Redis端口,可省略，默认6379
 8. `Redis_Prefix=""`  Redis键名前缀，可省略，默认为空
 9. `Redis_DB=0`  Redis数据库，可省略，默认为0
+10. `Redis_Pass=""`  Redis密码，可省略，默认为空
 ## 指令
 ### 指令表
 -----通用-----  

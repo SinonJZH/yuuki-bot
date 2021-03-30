@@ -37,10 +37,13 @@ class data_source:
                 global_config.redis_port = 6379
             if global_config.redis_db is None:
                 global_config.redis_db = 0
+            if global_config.redis_pass is None:
+                global_config.redis_pass = ""
             self.redis_connect = redis.StrictRedis(
                 host=global_config.redis_adress,
                 port=global_config.redis_port,
                 db=global_config.redis_db,
+                password=global_config.redis_pass,
                 decode_responses=True
             )
             if global_config.redis_prefix:
