@@ -9,7 +9,7 @@
 
 ## 安装&配置
 ### 系统要求
-1. Python 3.8+
+1. Python 3.8+ with redis & mysql-connector
 2. JAVA 11+
 3. Mysql
 4. Redis
@@ -17,7 +17,13 @@
 //
 ### 2.安装[Nonebot](https://v2.nonebot.dev/)
 //
-### 3.配置.env文件
+### 3.安装yuuki-bot
+1. 进入创建的机器人目录`cd ./bot-name`
+2. 删除`./bot_name` 或`./src`
+3. ```shell
+   git clone https://github.com/SinonJZH/yuuki-bot.git ./bot_name #或./src
+   ```
+### 4.配置.env文件
 将`.env.example`复制到创建的机器人的根目录，根据需要更名为`.env.{ENVIRONMENT}`  
 `.env.example`文件各配置项说明：  
 （其他配置项目请参考官方文档）
